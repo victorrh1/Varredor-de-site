@@ -3,16 +3,13 @@ from selenium.webdriver.common.by import By
 import os
 from time import sleep
 
-
-#Entrar no site: link
 driver = webdriver.Chrome()
-driver.get('https://clone-olx-devaprender.netlify.app/')
+driver.get('https://devaprender-play.netlify.app/')
 sleep(5)
-#Anotar o nome do primeiro produto
-produtos = driver.find_elements(By.XPATH,"//h3[@class='text-base text-gray-900 line-clamp-2 mb-1 hover:text-[#6E0AD6]']")
-#Anotar o preço do primeiro produto
-precos = driver.find_element(By.XPATH,"//span [@class='text-2xl font-bold text-gray-900']")
-#Guardar informações em arquivos de texto(csv)
+
+produtos = driver.find_elements(By.XPATH,"//h3[@class='text-lg font-semibold text-gray-900 group-hover:text-indigo-600']")
+precos = driver.find_elements(By.XPATH,"//p [@class='text-2xl font-bold text-indigo-600']")
+
 for produto, preco in zip(produtos,precos):
 	with open('preços.csv', 'a',encoding='utf-8') as arquivo:
 	    arquivo.write(f'{produto.text},{preco.text}{os.linesep}')
